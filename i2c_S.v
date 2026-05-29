@@ -55,9 +55,9 @@ module i2c_slave (
         end
 
         S1: begin
-          tx_reg[3'd7 - count] <= SDA; // Handle bit indexing uniformly via explicit expression         
+          tx_reg[3'd7 - count] <= SDA;         
           if (count == 3'd7) begin
-            if ({tx_reg[7:1], SDA} == address) begin // Include live SDA bit for immediate match
+            if ({tx_reg[7:1], SDA} == address) begin 
               sda_out <= 1'b0;            
               mode    <= SDA;             
               state   <= S3;

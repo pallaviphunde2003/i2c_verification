@@ -11,10 +11,20 @@ module i2c_master (
     output reg  [7:0]  dout
 );
 
-  localparam S0  = 4'd0,  S1  = 4'd1,  S2  = 4'd2,  S3  = 4'd3,
-             S4  = 4'd4,  S5  = 4'd5,  S6  = 4'd6,  S7  = 4'd7,
-             S8  = 4'd8,  S9  = 4'd9,  S11 = 4'd11, S12 = 4'd12,
-             S13 = 4'd13, S14 = 4'd14;
+  localparam S0  = 4'd0,  
+  	     S1  = 4'd1,  
+  	     S2  = 4'd2,  
+  	     S3  = 4'd3,
+             S4  = 4'd4,  
+             S5  = 4'd5,  
+             S6  = 4'd6,  
+             S7  = 4'd7,
+             S8  = 4'd8,  
+             S9  = 4'd9,  
+             S11 = 4'd11, 
+             S12 = 4'd12,
+             S13 = 4'd13, 
+             S14 = 4'd14;
 
   reg [3:0] state;
   reg [2:0] count;
@@ -53,7 +63,7 @@ module i2c_master (
         
         S2: begin 
           scl_out <= 1'b0; 
-          sda_out <= tx_reg[3'd7 - count]; // Explicit MSB indexing
+          sda_out <= tx_reg[3'd7 - count]; 
           state   <= S3; 
         end
         
@@ -91,7 +101,7 @@ module i2c_master (
             sda_out <= 1'b0; 
             state   <= S13; 
           end else begin 
-            sda_out <= tx_reg[3'd7 - count]; // Explicit MSB indexing
+            sda_out <= tx_reg[3'd7 - count]; 
             state   <= S7; 
           end
         end
@@ -114,7 +124,7 @@ module i2c_master (
         
         S9: begin 
           scl_out <= 1'b1; 
-          tx_reg[3'd7 - count] <= SDA; // MSB indexing
+          tx_reg[3'd7 - count] <= SDA;
           if(count == 3'd7) state <= S11; 
           else begin 
             count <= count + 1'b1; 
